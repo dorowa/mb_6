@@ -45,9 +45,9 @@ def find(artist, genre = None):
     Находит все альбомы в базе данных по заданному артисту, для пробы вернем не объект, а список 
     """
     session = connect_db()
-    if genre is None:
+    if genre is None: #это выборка для поиска по исполнителю, жанр не важен
         albums = session.query(Album).filter(Album.artist == artist).order_by(Album.year.desc()).all()
-    else:
+    else: #выборка для общего списка с группировкой по исполнителю и по жанру
         albums = session.query(Album).filter(Album.artist == artist).filter(Album.genre == genre).order_by(Album.year.desc()).all()
     return_ = [(album_.album,album_.genre,album_.year) for album_ in albums]
     session.close()
@@ -65,12 +65,16 @@ def write_db(album):
 
 def check_album(album_data):
     """
-    Находит все альбомы в базе данных по заданному артисту
+    Находит количество всех альбомов в базе данных по заданному артисту
     """
     session = connect_db()
     albums = session.query(Album).filter(Album.artist == album_data["artist"]).filter(Album.album == album_data["album"]).count()
     return albums
 
 def flush_session():
+    """ 
+    Заглушка, использовалась для проверки
+    """
     #session.commit()
+    #как ни странно, методы POST и GET работают синхронно, но в документации не нашел
     return True
