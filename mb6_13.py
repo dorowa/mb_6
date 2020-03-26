@@ -40,7 +40,8 @@ def get_albums(artist):
         fields_ = {
             "title": "База альбомов",
             "header": artist,
-            "contents": []
+            "contents": [],
+            "count":len(albums_)
         }
         for album_ in albums_:
             fields_["contents"].append((album_[0], album_[1], album_[2]))        
