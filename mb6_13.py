@@ -62,10 +62,10 @@ def set_album():
     !!! Обратите внимание !!!
     В задании 13.2 POST запросы в route /albums/ с закрывающим слешем"""
     album_data = {
-        "artist": request.forms.get("artist").title(),
-        "genre": request.forms.get("genre").title(),
-        "album": request.forms.get("album"),
-        "year": request.forms.get("year")
+        "artist": request.forms.artist.title(),
+        "genre": request.forms.genre.title(),
+        "album": request.forms.album,
+        "year": request.forms.year
     }
     year_ = album_data["year"]
     #проверим введеный год, возьмем год из сегодняшней даты
